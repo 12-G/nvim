@@ -1,8 +1,18 @@
 return {
 
 	{
+		"folke/which-key.nvim",
+		opts = {
+			spec = {
+				{ "<BS>", desc = "Decrement Selection", mode = "x" },
+				{ "<c-space>", desc = "Increment Selection", mode = { "x", "n" } },
+			},
+		},
+	},
+
+	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+		event = "User BaseDefered",
 		opts = {
 			indent = { char = "│", highlight = "IblChar" },
 			scope = { char = "│", highlight = "IblScopeChar" },
@@ -16,8 +26,8 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "User BaseDefered",
-		-- event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+		version = false,
+		event = { "User BaseDefered", "VeryLazy" },
 		lazy = vim.fn.argc(-1) == 0,
 		init = function(plugin)
 			require("lazy.core.loader").add_to_rtp(plugin)
@@ -34,17 +44,34 @@ return {
 	},
 
 	{
-		"numToStr/Comment.nvim",
-		keys = {
-			{ "gcc", mode = "n", desc = "Comment toggle current line" },
-			{ "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-			{ "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-			{ "gbc", mode = "n", desc = "Comment toggle current block" },
-			{ "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-			{ "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
-		},
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+	},
+
+	{
+		"lewis6991/gitsigns.nvim",
+		ft = { "gitcommit", "diff" },
+		init = function()
+			-- load gitsigns only when a git file is opened
+			vim.api.nvim_create_autocmd({ "BufRead" }, {
+				group = vim.api.nvim_create_augroup("GitSignsLazyLoad", { clear = true }),
+				callback = function()
+					vim.fn.system("git -C " .. '"' .. vim.fn.expand("%:p:h") .. '"' .. " rev-parse")
+					if vim.v.shell_error == 0 then
+						vim.api.nvim_del_augroup_by_name("GitSignsLazyLoad")
+						vim.schedule(function()
+							require("lazy").load({ plugins = { "gitsigns.nvim" } })
+						end)
+					end
+				end,
+			})
+		end,
+		opts = function()
+			return require("plugins.config.others").gitsigns
+		end,
 		config = function(_, opts)
-			require("Comment").setup(opts)
+			require("gitsigns").setup(opts)
 		end,
 	},
 }

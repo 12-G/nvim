@@ -1,6 +1,4 @@
-local neodev = require("neodev")
 local lspconfig = require("lspconfig")
-local utils = require("core.utils")
 
 local servers = {
 	"pyright",
@@ -12,13 +10,6 @@ local on_attach = function(_, bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-neodev.setup({
-	library = {
-		plugins = { "nvim-dap-ui" },
-		types = true,
-	},
-})
 
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,

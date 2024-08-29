@@ -17,12 +17,6 @@ return {
 		end,
 	},
 	{
-		"folke/neodev.nvim",
-		init = function()
-			require("core.utils").lazy_load("neodev.nvim")
-		end,
-	},
-	{
 		"nvim-tree/nvim-web-devicons",
 		opts = function()
 			return { override = require("plugins.config.ui").devicons.override }
@@ -92,6 +86,26 @@ return {
 		},
 		opts = function()
 			return require("plugins.lsp.cmp")
+		end,
+	},
+
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		cmd = "LazyDev",
+		opts = {
+			library = {
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
+	-- Manage libuv types with lazy. Plugin will never be loaded
+	"Bilal2453/luvit-meta",
+	-- Add lazydev source to cmp
+	{
+		"hrsh7th/nvim-cmp",
+		opts = function(_, opts)
+			table.insert(opts.sources, { name = "lazydev", group_index = 0 })
 		end,
 	},
 }

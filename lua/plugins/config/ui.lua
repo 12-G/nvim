@@ -37,7 +37,16 @@ ui.catppuccin = {
 ui.treesitter = {
 	ensure_installed = {
 		"lua",
+		"luadoc",
 		"python",
+		"bash",
+		"c",
+		"json",
+		"toml",
+		"regex",
+		"vim",
+		"vimdoc",
+		"yaml",
 	},
 
 	highlight = {
@@ -47,6 +56,16 @@ ui.treesitter = {
 	},
 
 	indent = { enable = true },
+
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<C-space>",
+			node_incremental = "<C-space>",
+			scope_incremental = false,
+			node_decremental = "<bs>",
+		},
+	},
 }
 
 ui.devicons = {
