@@ -56,4 +56,13 @@ return {
 			end, 0)
 		end,
 	},
+
+	{
+		"echasnovski/mini.icons",
+		version = false,
+		init = function()
+			require("mini.icons").mock_nvim_web_devicons()
+		end,
+		config = true,
+	},
 }

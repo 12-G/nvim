@@ -16,12 +16,7 @@ return {
 			vim.g.mason_binaries_list = opts.ensure_installed
 		end,
 	},
-	{
-		"nvim-tree/nvim-web-devicons",
-		opts = function()
-			return { override = require("plugins.config.ui").devicons.override }
-		end,
-	},
+
 	{
 		"nvimdev/lspsaga.nvim",
 		event = { "LSPAttach" },
@@ -36,6 +31,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		event = "User BaseDefered",
@@ -43,6 +39,7 @@ return {
 			require("plugins.lsp.lsp")
 		end,
 	},
+
 	{
 		"hrsh7th/nvim-cmp",
 		version = false,
@@ -56,22 +53,6 @@ return {
 				config = function(_, opts)
 					require("luasnip").config.set_config(opts)
 					require("plugins.config.others").luasnip(opts)
-				end,
-			},
-
-			-- autopairing of (){}[] etc
-			{
-				"windwp/nvim-autopairs",
-				opts = {
-					fast_wrap = {},
-					disable_filetype = { "TelescopePrompt", "vim" },
-				},
-				config = function(_, opts)
-					require("nvim-autopairs").setup(opts)
-
-					-- setup cmp for autopairs
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
 				end,
 			},
 
