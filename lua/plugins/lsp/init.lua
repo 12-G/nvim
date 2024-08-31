@@ -19,7 +19,7 @@ return {
 
 	{
 		"nvimdev/lspsaga.nvim",
-		event = { "LSPAttach" },
+		event = "LSPAttach",
 		config = function()
 			require("lspsaga").setup({
 				symbol_in_winbar = {
