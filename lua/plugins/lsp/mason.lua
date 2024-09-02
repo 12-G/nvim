@@ -3,9 +3,9 @@ local options = {
 
 	ensure_installed = {
 		-- LSP
-		"lua-language-server",
 		"basedpyright",
 		"bash-language-server",
+		"lua-language-server",
 		"clangd",
 
 		-- DAP
@@ -13,6 +13,8 @@ local options = {
 
 		-- Formatters
 		"stylua",
+		"black",
+		"isort",
 	},
 
 	ui = {

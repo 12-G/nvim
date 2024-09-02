@@ -1,5 +1,28 @@
 return {
 	{
+		"neovim/nvim-lspconfig",
+		event = "User BaseDefered",
+		dependencies = {
+			{
+				"nvimdev/lspsaga.nvim",
+				config = function()
+					require("lspsaga").setup({
+						symbol_in_winbar = {
+							hide_keyword = true,
+						},
+						outline = {
+							layout = "float",
+						},
+					})
+				end,
+			},
+		},
+		config = function()
+			require("plugins.lsp.lsp")
+		end,
+	},
+
+	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
 		opts = function()
@@ -14,29 +37,6 @@ return {
 			end, {})
 
 			vim.g.mason_binaries_list = opts.ensure_installed
-		end,
-	},
-
-	{
-		"nvimdev/lspsaga.nvim",
-		event = "LSPAttach",
-		config = function()
-			require("lspsaga").setup({
-				symbol_in_winbar = {
-					hide_keyword = true,
-				},
-				outline = {
-					layout = "float",
-				},
-			})
-		end,
-	},
-
-	{
-		"neovim/nvim-lspconfig",
-		event = "User BaseDefered",
-		config = function()
-			require("plugins.lsp.lsp")
 		end,
 	},
 
