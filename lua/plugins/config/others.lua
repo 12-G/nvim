@@ -1,5 +1,4 @@
 local E = {}
-local utils = require("core.utils")
 
 E.luasnip = function()
 	-- vscode format

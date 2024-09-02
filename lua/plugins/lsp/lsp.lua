@@ -45,6 +45,29 @@ lspconfig.clangd.setup({
 lspconfig.basedpyright.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
+	filetypes = { "python" },
+	single_file_support = true,
+	settings = {
+		basedpyright = {
+			analysis = {
+				typeCheckingMode = "basic",
+				autoImportCompletions = true,
+				autoSearchPaths = true,
+				diagnosticMode = "openFilesOnly",
+				useLibraryCodeForTypes = true,
+				reportMissingTypeStubs = false,
+				diagnosticSeverityOverrides = {
+					reportUnusedImport = "information",
+					reportUnusedFunction = "information",
+					reportUnusedVariable = "information",
+					reportGeneralTypeIssues = "none",
+					reportOptionalMemberAccess = "none",
+					reportOptionalSubscript = "none",
+					reportPrivateImportUsage = "none",
+				},
+			},
+		},
+	},
 })
 
 for _, server in ipairs(servers) do
