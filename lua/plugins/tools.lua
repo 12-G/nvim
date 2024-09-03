@@ -46,6 +46,7 @@ return {
 			{
 				"<leader>to",
 				"<cmd>ToggleTerm direction=float <CR>",
+				desc = "open folat terminal",
 			},
 		},
 		config = true,

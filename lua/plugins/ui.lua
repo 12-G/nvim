@@ -23,7 +23,7 @@ return {
 	{
 		"rebelot/heirline.nvim",
 		dependencies = { "zeioth/heirline-components.nvim" },
-		event = "User BaseDefered",
+		event = "VeryLazy",
 		opts = function()
 			return require("plugins.config.heirline")
 		end,

@@ -41,6 +41,35 @@ return {
 	},
 
 	{
+		"linux-cultist/venv-selector.nvim",
+		branch = "regexp",
+		opts = {
+			dap_enabled = true,
+			settings = {
+				options = {
+					notify_user_on_venv_activation = true,
+				},
+			},
+		},
+		keys = {
+			-- Keymap to open VenvSelector to pick a venv.
+			{ "<leader>vs", "<cmd>VenvSelect<cr>" },
+			-- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
+			{ "<leader>vc", "<cmd>VenvSelectCached<cr>" },
+		},
+	},
+
+	{
+		"mfussenegger/nvim-dap-python",
+		dependencies = { "mfussenegger/nvim-dap" },
+		ft = "python",
+		config = function()
+			---@diagnostic disable-next-line: missing-fields
+			require("dap-python").setup("python", {})
+		end,
+	},
+
+	{
 		"hrsh7th/nvim-cmp",
 		version = false,
 		event = "InsertEnter",
